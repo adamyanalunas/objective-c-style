@@ -462,7 +462,7 @@ This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.
 
 ## Imports
 
-If there is more than one import statement, group the statements [together](http://ashfurrow.com/blog/structuring-modern-objective-c). Commenting each group is optional.
+If there is more than one import statement, group the statements [together](http://ashfurrow.com/blog/structuring-modern-objective-c). Commenting each group is optional. Always alphabetize your imports.
 
 Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#using-modules) syntax.
 
@@ -471,11 +471,11 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 @import QuartzCore;
 
 // Models
-#import "NYTUser.h"
+#import "ADYUser.h"
 
 // Views
-#import "NYTButton.h"
-#import "NYTUserView.h"
+#import "ADYButton.h"
+#import "ADYUserView.h"
 ```
 
 ## Lazy Initialization
