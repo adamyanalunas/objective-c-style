@@ -35,6 +35,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Booleans](#booleans)
 * [Singletons](#singletons)
 * [Imports](#imports)
+* [Lazy Initialization](#lazy-initialization)
 * [Categories](#categories)
 * [Xcode Project](#xcode-project)
 
@@ -475,6 +476,41 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 // Views
 #import "NYTButton.h"
 #import "NYTUserView.h"
+```
+
+## Lazy Initialization
+
+Lazy initialization should be used with caution. Don't rely on it to create objects on any execution path. When called for favor leftmost/optimistic structure.
+
+**For example:**
+
+```objc
+- (UIView *)customView
+{
+    if (_customView) return customView;
+    
+    _customView = SomeFancyView.new;
+    _customView.translatesAutoresizingMaskIntoConstraints = NO;
+    _customView.tintColor = UIColor.darkGrayColor;
+    
+    return _customView;
+}
+```
+
+**Not:**
+
+```objc
+- (UIView *)customView
+{
+    if (!_customView)
+    {
+        _customView = SomeFancyView.new;
+        _customView.translatesAutoresizingMaskIntoConstraints = NO;
+        _customView.tintColor = UIColor.darkGrayColor;
+    }
+    
+    return _customView;
+}
 ```
 
 ## Categories
