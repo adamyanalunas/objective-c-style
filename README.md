@@ -16,6 +16,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 
 * [Dot-Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
+* [Curly Braces](#curly-braces)
 * [Conditionals](#conditionals)
   * [Ternary Operator](#ternary-operator)
 * [Error handling](#error-handling)
@@ -74,6 +75,39 @@ else
 ```
 * There should be two blank lines between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
 * `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+
+## Curly Braces
+
+Opening and closing curly braces should be on new lines for method declarations and conditional statements. Blocks should have the opening curly brace on the same line and the closing brace on a newline.
+
+**For example:**
+```objc
+- (UIView *)animateView:(UIView *)view
+{
+    if (view.isHidden)
+    {
+        view.hidden = NO;
+    }
+    
+    [UIView animateWithDuration:.3 animations:^{
+        …
+    }];
+}
+```
+
+**Not:**
+```objc
+- (UIView *)animateView:(UIView *)view {
+    if (view.isHidden) {
+        view.hidden = NO;}
+    
+    [UIView animateWithDuration:.3 animations:^
+    {
+        …
+    }];
+}
+```
+
 
 ## Conditionals
 
