@@ -19,6 +19,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Conditionals](#conditionals)
   * [Ternary Operator](#ternary-operator)
 * [Error handling](#error-handling)
+* [Returns](#returns)
 * [Methods](#methods)
 * [Variables](#variables)
 * [Naming](#naming)
@@ -141,6 +142,56 @@ if (error)
 ```
 
 Some of Apple’s APIs write garbage values to the error parameter (if non-NULL) in successful cases, so switching on the error can cause false negatives (and subsequently crash).
+
+## Returns
+
+Methods that requrie a return value should do so as the last operation of the method. Use a variable to store the return value as you progress through the method instead of using multiple `return`s throughout. Only in rare cases should a `return` appear anywhere else. `goto` versus `return` to break out of nested loops, for example.
+
+**ForExample:**
+
+```objc
+- (BOOL)isCorrect
+{
+    BOOL correct = NO;
+    
+    if (someThing)
+    {
+        NSInteger count = …
+        NSString *foo = …
+        correct = (count > 5 && [foo isEqualToString:@"bar"]);
+    }
+    else if (someOtherThing)
+    {
+        NSURL *url = …
+        NSString *owner = …
+        correct = (url && owner.isRegistered);
+    }
+    
+    return correct;
+ }
+ ```
+ 
+ **Not:**
+```objc
+- (BOOL)isCorrect
+{
+    if (someThing)
+    {
+        NSInteger count = …
+        NSString *foo = …
+        return (count > 5 && [foo isEqualToString:@"bar"]);
+    }
+    else if (someOtherThing)
+    {
+        NSURL *url = …
+        NSString *owner = …
+        return (url && owner.isRegistered);
+    }
+    
+    return NO;
+ }
+ ```
+
 
 ## Methods
 
