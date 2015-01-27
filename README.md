@@ -14,6 +14,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 
 ## Table of Contents
 
+* [Alphabetization](#alphabetization)
 * [Dot-Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
 * [Curly Braces](#curly-braces)
@@ -40,6 +41,84 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Lazy Initialization](#lazy-initialization)
 * [Categories](#categories)
 * [Xcode Project](#xcode-project)
+
+## Alphabetization
+
+Always alphabetize all imports, properties, method declarations in headers, protocol conformation, constants, and `define`s.
+
+**For example:**
+```objc
+//
+//  SomeViewController.h
+//  Project
+//
+//  Created by Adam Yanalunas on 1/27/15.
+//  Copyright (c) 2015 Some Company. All rights reserved.
+//
+
+#import "SomeCollectionViewController.h"
+#import "SomeOtherViewController.h"
+#import "SomeResourcePresenter.h"
+#import <PSPDFKit/PSPDFKit.h>
+#import "UICollectionViewController+OverrideTaps.h"
+
+
+@interface SomePersonalViewController : SomeCollectionViewController <SomeCollectionViewControllerDelegate, PSPDFCacheDelegate, UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic, strong) NSArray *resources;
+@property (nonatomic, strong) NSMutableDictionary *resourceViewers;
+
+- (SomeCollectionViewCell *)cellForResource:(id<SomeResourceProtocol>)resource;
+- (void)cleanup;
+- (void)closePresenters;
+- (NSString *)messageForEmptySection:(NSInteger)section;
+- (NSArray *)pathsWithDocument:(PSPDFDocument *)document;
+- (NSObject<SomeResourcePresenter> *)presenterFromClass:(__unsafe_unretained Class)presenterClass;
+- (void)refreshDataAndView;
+- (void)thumbnailCreated:(NSNotification *)notification;
+
+@end
+```
+
+**Not:**
+**For example:**
+```objc
+//
+//  SomeViewController.h
+//  Project
+//
+//  Created by Adam Yanalunas on 1/27/15.
+//  Copyright (c) 2015 Some Company. All rights reserved.
+//
+
+#import "UICollectionViewController+OverrideTaps.h"
+#import "SomeResourcePresenter.h"
+#import "SomeCollectionViewController.h"
+#import "SomeOtherViewController.h"
+
+#import <PSPDFKit/PSPDFKit.h>
+
+
+@interface SomePersonalViewController : SomeCollectionViewController <
+UICollectionViewDelegateFlowLayout, 
+SomeCollectionViewControllerDelegate, 
+PSPDFCacheDelegate
+>
+
+@property (nonatomic, strong) NSArray *resources;
+- (SomeCollectionViewCell *)cellForResource:(id<SomeResourceProtocol>)resource;
+- (void)cleanup;
+- (NSString *)messageForEmptySection:(NSInteger)section;
+- (NSArray *)pathsWithDocument:(PSPDFDocument *)document;
+- (void)closePresenters;
+
+- (NSObject<SomeResourcePresenter> *)presenterFromClass:(__unsafe_unretained Class)presenterClass;
+- (void)refreshDataAndView;
+- (void)thumbnailCreated:(NSNotification *)notification;
+
+@property (nonatomic, strong) NSMutableDictionary *resourceViewers;
+@end
+```
 
 ## Dot-Notation Syntax
 
