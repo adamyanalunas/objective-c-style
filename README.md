@@ -17,6 +17,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Alphabetization](#alphabetization)
 * [Dot-Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
+* [Multi-line](#multiline)
 * [Curly Braces](#curly-braces)
 * [Conditionals](#conditionals)
   * [Ternary Operator](#ternary-operator)
@@ -154,6 +155,23 @@ else
 ```
 * There should be two blank lines between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
 * `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+
+## Multiline
+
+Multiline calls should be avoided as much as reasonably possible. If lines are too long, adjust your editor size, soft wrap rules or text size. Much like tabs, this allows developers to adjust their view according to preferences.
+
+**For example:**
+```objc
+[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(resizeText:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+```
+
+**Not:**
+```objc
+[NSNotificationCenter.defaultCenter addObserver:self 
+                                       selector:@selector(resizeText:)
+                                           name:UIContentSizeCategoryDidChangeNotification 
+                                         object:nil];
+```
 
 ## Curly Braces
 
